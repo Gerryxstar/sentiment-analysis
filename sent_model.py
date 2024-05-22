@@ -8,9 +8,13 @@ nltk.download('punkt')
 
 app = Flask(__name__)
 
+# Obtener las rutas de los modelos desde las variables de entorno (ruta oculta, para esto activa primero tu entorno virtual (desde cmd), despues instala la libreria: pip install python-dotenv desde cmd, despues creas las varianbles en cmd que contendran las rutas de tus modelos)
+modelo_path = os.getenv('MODEL_PATH')
+vectorizador_path = os.getenv('VECTORIZER_PATH')
+
 # Cargar el modelo persistente
-modelo_sentimientos = joblib.load('C:\\Users\\cpfso\\OneDrive\\Documents\\Gerardo Solares\\Data Science\\U-Camp\\Modulo 7 - Tecnicas avanzadas y empleabilidad\\Proyecto modulo 7\\Play store\\modelo_sentimientos.pkl')
-vectorizador_sentimientos = joblib.load('C:\\Users\\cpfso\\OneDrive\\Documents\\Gerardo Solares\\Data Science\\U-Camp\\Modulo 7 - Tecnicas avanzadas y empleabilidad\\Proyecto modulo 7\\Play store\\vectorizador_sentimientos.pkl')
+modelo_sentimientos = joblib.load(modelo_path)
+vectorizador_sentimientos = joblib.load(vectorizador_path)
 
 @app.route('/analizar_sentimiento', methods=['POST']) # metodo post, se usa porque es el metodo mas seguro que otros, ejemplo: GET.
 def analizar_sentimiento():
